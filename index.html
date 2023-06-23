@@ -26,16 +26,18 @@
        
        #empty-boxes {
           float: left;
-          width: 70%;
+          width: 80%;
           background-color: #f1f1f1;
           padding: 20px;
+          height: 400px;
+          overflow: scroll;
        }
        
       
        
        #dice {
           float: right;
-          width: 30%;
+          width: 20%;
           padding: 20px;
        }
       
@@ -66,15 +68,22 @@
         
         
         /* Hide images of slideshow by default, show first measure */
-        .mySlides .drag{
-            display: inline-table;
-        }        
+       .slideshow-container .mySlides {
+         display: none; 
+        }
+        .mySlides.active {
+          display: flex
+        }
+        .slideshow-container{
+          height: 400px;
+          overflow: scroll;
+        }
         
         /* Next & previous buttons */
         .prev, .next {
           cursor: pointer;
-          position: absolute;
-          top: 70%;
+          position: relative;
+          top: 80%;
           width: auto;
           margin-top: -22px;
           padding: 16px;
@@ -88,15 +97,20 @@
         
         /* position next button right */
         .next {
-          right: 41%;
+          left: 70%;
           border-radius: 3px 0 0 3px;
         }
         
         .prev {
-         left: 10px;
+         left: 2%;
          border-radius: 3px 0 0 3px;
         }
-        
+        .gallery-buttons {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+          }
         /* measure 1, measure 2,... on top of section */
         .numbertext {
           color: black;
@@ -114,8 +128,12 @@
         
     </style>
     <script>
-            var soundArray =["empty", "empty", "empty", "empty", "emty", "empty"];
+            var soundArray =["empty", "empty", "empty", "empty", "empty", "empty"];
 
+            function checkSoundArray() {
+              console.log(soundArray);
+            }
+            
             <!-- Image Slideshow -->
             let slideIndex = 1;
             showSlides(slideIndex);
@@ -142,13 +160,14 @@
               for (i = 0; i < dots.length; i++) {
                 dots[i].className = dots[i].className.replace(" active", "");
               }
-              slides[slideIndex-1].style.display = "block";
+              slides[slideIndex-1].style.display = "flex";
               dots[slideIndex-1].className += " active";
             }
+            
+            // Initially show the first gallery
+            showSlides(slideIndex);        
         
-        
-        
-            <!-- Drag and Drop -->
+            // Drag and Drop
              function allowDrop(ev) {
                ev.preventDefault();
              }
@@ -158,15 +177,23 @@
              }
              
              function playSound(sounds){
-                alert("PLAY Sound")
-                sounds.forEach((sound)=>{
-                    console.log("sound", sound)
-                    //Soundname needs to correspond to name of sound file
-                    var audio = new Audio(sound+'.mp3');
+                // play sounds after each other
+                var i = 0;
+                var playNextSound = function () {
+                  if (i < sounds.length) {
+                    var sound = sounds[i];
+                    console.log("sound", sound);
+                    var audio = new Audio("music/" + sound + ".wav");
                     audio.play();
-                })
-             }
-             
+                    audio.onended = function () {
+                      i++;
+                      playNextSound();
+                    };
+                  }
+                };
+                playNextSound();
+              }
+                
              function drop(ev) {
                ev.preventDefault();
                var data = ev.dataTransfer.getData("text");
@@ -175,14 +202,12 @@
                
                if (!soundArray.some(function (item) {
                     return item.split(',')[0] === "empty";
-                    })) {
-                        playSound(soundArray)
-                    }
-            
+                    })) {playSound(soundArray)}
+
                ev.target.appendChild(document.getElementById(data));
              }
              
-            <!-- dice: random number generator - dice pictures + number + click-button -->
+            // dice: random number generator - dice pictures + number + click-button
             var para;
             var rannum;
             function clickevent(){
@@ -222,18 +247,20 @@
     <section id="section1">
         <div id="empty-boxes" class="row">
             <h3>Make your own melody here:</h3>
-            <div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            <div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            <div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            <div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            <div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-            <div class="drop" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="drop" id="container0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="drop" id="container1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="drop" id="container2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="drop" id="container3" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="drop" id="container4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div class="drop" id="container5" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
    
+    
         <div id="play-button">
-            <button onclick="playSound()">Play</button>
+            <button onclick="playSound(soundArray)">Play</button>
+            <button onclick="checkSoundArray()">Check soundArray</button>
         </div>
-        
+    
     <!-- dice with button -->
         <div id="dice">
             <button onclick="clickevent()">Roll it Bayybeeee!</button>
@@ -246,7 +273,7 @@
     <section id="section2" class="row">
         <h3>Pick a measure from here:</h3>
         <div class="slideshow-container">
-            <div class="mySlides">
+            <div class="mySlides active">
                 <div class="numbertext">measure 1</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
@@ -409,7 +436,11 @@
                 </div>
             </div>
             
-            <!-- Next and previous buttons -->
+            
+        </div>
+        
+        <!-- Next and previous buttons -->
+        <div class="gallery-buttons">
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
