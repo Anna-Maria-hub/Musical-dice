@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- always load the CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.knightlab.com/libs/timeline/latest/css/timeline.css">
+    <!-- play button font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     
     <style>
         
@@ -17,11 +20,29 @@
           padding: 10px;
        }
        
-       header {
-          background-color: #666;
-          padding: 20px;
-          text-align: center;
-          color: white;          
+       #background {
+         position: relative;
+         border: 1px solid black;
+         padding: 25px;
+         text-align: center;
+       }       
+       #background::before {
+         content: "";
+         background-image: url('header_bild.PNG');
+         background-size: initial;
+         background-position: center;
+         position: absolute;
+         top: 0;
+         right: 0;
+         bottom: 0;
+         left: 0;
+         opacity: 0.3;
+         z-index: -1;
+       }       
+       #background h2 {
+         color: black;
+         position: relative;
+         z-index: 3;
        }
        
        #empty-boxes {
@@ -31,14 +52,21 @@
           padding: 20px;
           height: 400px;
           overflow: scroll;
-       }
+       }          
        
-      
+       #button {
+         padding: 20px;
+         text-align: center;
+       }
+       #play-button {
+         background: #FA8072;
+       }
        
        #dice {
           float: right;
+          text-align: center;
           width: 20%;
-          padding: 20px;
+          padding: 10px;
        }
       
        /* clear floats after section */    
@@ -64,8 +92,7 @@
         
         .drop {
           border: 1px solid black;
-        }
-        
+        }        
         
         /* Hide images of slideshow by default, show first measure */
        .slideshow-container .mySlides {
@@ -77,14 +104,13 @@
         .slideshow-container{
           height: 400px;
           overflow: scroll;
+          position: relative;
         }
         
         /* Next & previous buttons */
         .prev, .next {
           cursor: pointer;
           position: relative;
-          top: 80%;
-          width: auto;
           margin-top: -22px;
           padding: 16px;
           color: white;
@@ -95,26 +121,23 @@
           user-select: none;
         }
         
-        /* position next button right */
-        .next {
-          left: 70%;
-          border-radius: 3px 0 0 3px;
+        /* position next/prev buttons right */        
+        .next .prev {
+            position: relative;
+            text-align: center;
+            border-radius: 3px 0 0 3px;
+        }        
+        
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.4);
         }
         
-        .prev {
-         left: 2%;
-         border-radius: 3px 0 0 3px;
-        }
-        .gallery-buttons {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1;
-          }
         /* measure 1, measure 2,... on top of section */
         .numbertext {
           color: black;
-          font-size: 12px;
+          font-size: 16px;
           padding: 8px 12px;
           position: relative;
           top: 0;
@@ -239,9 +262,10 @@
 <body>
 
     <header>
-        <h2>Musical game of dice</h2>
+        <div id="background">
+            <h2>Musical game of dice</h2>
+        </div>
     </header>
-    <p>Drag the measures into your own order.</p>
     
     <!-- empty boxes for dragging -->
     <section id="section1">
@@ -256,25 +280,26 @@
         </div>
    
     
-        <div id="play-button">
-            <button onclick="playSound(soundArray)">Play</button>
-            <button onclick="checkSoundArray()">Check soundArray</button>
+        <div id="button"><p>When you're done:</p>
+            <button id="play-button" onclick="playSound(soundArray)">Play <i class="fas fa-play"></i></button>
+            <!-- check what's in the SoundArray
+                <button onclick="checkSoundArray()">Check soundArray</button> -->
         </div>
     
     <!-- dice with button -->
         <div id="dice">
-            <button onclick="clickevent()">Roll it Bayybeeee!</button>
-            <p id="demo"></p></br>
+            <button onclick="clickevent()">Roll the dice!</button>
+            <p id="demo"></p>
             <img id="myImg" src="" alt="dice" height="150px" width="150px">
         </div>
     </section> 
     
     <!-- boxes with pictures -->
     <section id="section2" class="row">
-        <h3>Pick a measure from here:</h3>
+        <h3>Pick a number from here for each measure and drag it above:</h3>
         <div class="slideshow-container">
             <div class="mySlides active">
-                <div class="numbertext">measure 1</div>
+                <div class="numbertext">measure 1:</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m1_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas1_1" width="120" height="170">
@@ -301,7 +326,7 @@
                 </div>
            </div>
             <div class="mySlides">
-                <div class="numbertext">measure 2</div>
+                <div class="numbertext">measure 2:</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m2_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas2_1" width="120" height="170">
@@ -328,7 +353,7 @@
                 </div>
             </div>
             <div class="mySlides">
-                <div class="numbertext">measure 3</div>
+                <div class="numbertext">measure 3:</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m3_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas3_1" width="120" height="170">
@@ -355,7 +380,7 @@
                 </div>
             </div>
             <div class="mySlides">
-                <div class="numbertext">measure 4</div>
+                <div class="numbertext">measure 4:</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m4_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas4_1" width="120" height="170">
@@ -382,7 +407,7 @@
                 </div>
             </div>
             <div class="mySlides">
-                <div class="numbertext">measure 5</div>
+                <div class="numbertext">measure 5:</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m5_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas5_1" width="120" height="170">
@@ -409,7 +434,7 @@
                 </div>
             </div>
             <div class="mySlides">
-                <div class="numbertext">measure 6</div>
+                <div class="numbertext">measure 6:</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m6_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas6_1" width="120" height="170">
@@ -436,14 +461,17 @@
                 </div>
             </div>
             
-            
-        </div>
-        
-        <!-- Next and previous buttons -->
-        <div class="gallery-buttons">
+            <!-- Next and previous buttons -->
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
+        <div class="Link">
+            <p>Source: 
+            <a href="https://s9.imslp.org/files/imglnks/usimg/e/ea/IMSLP374746-PMLP243537-kirnberger_allezeit_fertiger_usw.pdf" target="_blank">
+                Johann Philipp Kirnberger's "Der allezeit fertige Polonoisen und Menuettencomponist"
+            </a></p>
+        </div>
+        
     </section>
     
 </body>
