@@ -90,11 +90,7 @@
           margin: 10px;
           padding: 10px;
         }
-        /* dropped pictures size */
-        .drop img {
-          width: 120px;
-          height: 170px;
-        }
+        
         .drop {
           border: 1px solid black;
         }        
@@ -206,43 +202,23 @@
                ev.dataTransfer.setData("text", ev.target.id);
              }
              
-             // store currently playing audio
-             var currentAudio;
-             
-            
-            function stopSound() {
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
-            }
-             
              function playSound(sounds){
-                if (currentAudio) {
-                    currentAudio.pause(); // Pause the current audio if it's playing
-                }
-                    
                 // play sounds after each other
                 var i = 0;
                 var playNextSound = function () {
                   if (i < sounds.length) {
                     var sound = sounds[i];
                     console.log("sound", sound);
-                    if (sound !== "empty") {
-                        currentAudio = new Audio("music/" + sound + ".wav");
-                        currentAudio.play();
-                        currentAudio.onended = function () {
-                            i++;
-                            playNextSound();
-                        };
-                    } else {
-                        i++;
-                        playNextSound();
-                    }
-                }
+                    var audio = new Audio("music/" + sound + ".wav");
+                    audio.play();
+                    audio.onended = function () {
+                      i++;
+                      playNextSound();
+                    };
+                  }
                 };
                 playNextSound();
-            }
+              }
                 
              function drop(ev) {
                ev.preventDefault();
@@ -250,70 +226,61 @@
                //put sound in the corresponding target
                soundArray[ev.target.id.replace("container","")] = data;
                
+               if (!soundArray.some(function (item) {
+                    return item.split(',')[0] === "empty";
+                    })) {playSound(soundArray)}
+
                ev.target.appendChild(document.getElementById(data));
              }
              
             // dice: random number generator - dice pictures + number + click-button
-            var autonum = [1, 2, 3, 4, 5, 6]; // go through 1-6 for measures 1-6
-            var currentAutonumIndex = 0; // index, for current autonum
-            var filledTaktCount = 0; // how many measures are filled
-            
-            function clickevent() {
-                // check, if all measures are filled
-                if (filledTaktCount < 6) {
-                    var rannum = Math.floor(Math.random() * 6) + 1; // generate random number between 1-6
-                    var currentAutonum = autonum[currentAutonumIndex]; // get current autonum
-                    var soundByte = "meas" + currentAutonum + "_" + rannum; // generate soundByte for diced measure in current autonum
-                    soundArray[filledTaktCount] = soundByte; // and add to soundArray
-            
-                    // get picture and add to container
-                    var image = document.createElement("img");
-                    image.src = "measures/m" + currentAutonum + "_r" + rannum + ".PNG";
-                    image.alt = "measure " + currentAutonum;
-                    image.draggable = true;
-                    image.ondragstart = drag;
-                    var containerId = "container" + filledTaktCount;
-                    document.getElementById(containerId).innerHTML = ""; // clear container
-                    document.getElementById(containerId).appendChild(image);
-            
-                    // Go to next autonum & increase number of filled measures
-                    currentAutonumIndex = (currentAutonumIndex + 1) % autonum.length;
-                    filledTaktCount++;
-            
-                    // Show digits of diced measure with image
-                    var para = document.getElementById("demo");
-                    para.innerHTML = rannum;
-                    
-                    // Get dice picture based on rannum
-                    document.getElementById("myImg").src = "dice_" + rannum + ".png";
-                    
-                    // SOUND IS NOT PLAYED WHEN FILLED --> "PLAY" BUTTON
-                }
+            var para;
+            var rannum;
+            function clickevent(){
+            rannum = Math.floor(Math.random() * 6) + 1;
+            para = document.getElementById("demo");
+            para.innerHTML = rannum;
+            if(rannum==1){
+                document.getElementById("myImg").src = "dice_1.png";
             }
+            if(rannum==2){
+                document.getElementById("myImg").src = "dice_2.png";
+            }
+            if(rannum==3){
+                document.getElementById("myImg").src = "dice_3.png";
+            }
+            if(rannum==4){
+                document.getElementById("myImg").src = "dice_4.png";
+            }
+            if(rannum==5){
+                document.getElementById("myImg").src = "dice_5.png";
+            }
+            if(rannum==6){
+                document.getElementById("myImg").src = "dice_6.png";
+            }
+            
+        var autonum = [1, 2, 3, 4, 5, 6];
         
-            function reset(){
-                console.log("reset")
-                soundArray.forEach((sound, index) => {
-                    var el = document.getElementById("container" + index);
-                    el?.querySelector("img")?.remove();
-                    console.log("EL", el);
-                });
-                
-                currentAutonumIndex = 0;
-                currentTaktCount = 0;
-                filledTaktCount = 0;
-                
-                soundArray = ["empty", "empty", "empty", "empty", "empty", "empty"];                
-            
-                var para = document.getElementById("demo");
-                para.innerHTML = "";
-                document.getElementById("myImg").src = "";
-            
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio = null;
+        var soundByte = "meas"+autonum+"_"+rannum;
+            console.log("soundByte", )
+            var found = false
+            soundArray.forEach((sound, index)=>{
+                if(soundArray[index] === "empty" && !found){
+                    soundArray[index] = soundByte;
+                    found = true;
+                    var myContainer = document.getElementById("container"+index);
+                    const image = document.createElement("img");
+                    myContainer.appendChild(image)
+                    myContainer.querySelector("img").src="measures/m"+autonum+"_r"+rannum+".PNG"
+                    console.log("myContainer", myContainer)
                 }
+            })
+            console.log("sound array", soundArray )
+            if (!soundArray.includes("empty")){
+                playSound(soundArray)
             }
+        }
+        
         
     </script>
 </head>
@@ -340,12 +307,8 @@
    
     
         <div id="button"><p>When you're done:</p>
-            <div><button onclick="reset()">RESET</button></div>
-            
             <button id="play-button" onclick="playSound(soundArray)">Play <i class="fas fa-play"></i></button>
-            <button id="stop-button" onclick="stopSound()">Stop <i class="fas fa-stop"></i></button>
-            
-            <!-- to check what's in the SoundArray:
+            <!-- check what's in the SoundArray
                 <button onclick="checkSoundArray()">Check soundArray</button> -->
         </div>
     
