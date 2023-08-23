@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Musical game of dice</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- always load the CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.knightlab.com/libs/timeline/latest/css/timeline.css">
+    <!-- play button font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    
+    <style>
+        
+       p, h3, h4, h5 {
+          padding: 15px;
+       }
+       
+       #background {
+         position: relative;
+         border: 1px solid black;
+         padding: 25px;
+         text-align: center;
+       }       
+       #background::before {
+         content: "";
+         background-image: url('pictures/header_bild.PNG');
+         background-size: initial;
+         background-position: center;
+         position: absolute;
+         top: 0;
+         right: 0;
+         bottom: 0;
+         left: 0;
+         opacity: 0.3;
+         z-index: -1;
+       }       
+       #background h2 {
+         color: black;
+         position: relative;
+         z-index: 3;
+       }
+       
+       #home, 
+       #info,
+       #about {
+         position: absolute;
+         top: 50px;
+         background: black;
+       }
+       #home {
+         right: 146px;
+       }       
+       #info {
+         right: 86px;
+       }
+       #about {
+         right: 10px;
+       }
+             
+       .composer-info {
+         display: flex;
+         align-items: center;
+       }
+       .composer-text {
+         flex: 1;
+         padding: 20px;
+       }
+       .composer-image {
+         padding: 20px;
+         
+       }
+       
+       .container {
+         display: flex;
+         justify-content: space-between;
+       }
+       
+       #cite, #cite2 {
+         font-size: 16px;
+         margin-right: auto;
+         margin-left: 0;
+       }
+       #cite2 {
+         border: 1px solid black;
+       }
+       
+       #table {
+         text-align: center;
+         margin-left: auto;
+       }
+        
+    </style>
+    <script>
+            
+        
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <div id="background">
+            <h2>Musical game of dice</h2>
+            <a href="index.html" id="home" class="btn btn-primary">Home</a>
+            <a href="Info.html" id="info" class="btn btn-primary">Info</a>
+            <a href="About.html" id="about" class="btn btn-primary">About</a>
+        </div>
+    </header>
+    <div>
+        <div class="composer-info">
+            <div class="composer-text">
+                <h3>About the composer: Johann Philipp Kirnberger</h3>
+                <p>  <a href="https://d-nb.info/gnd/118777238" target="_blank">GND</a>, 
+                    <a href="https://www.wikidata.org/wiki/Special:EntityPage/Q505543" target="_blank">Wikidata</a></p>
+                <p><strong><a href="https://de.wikipedia.org/wiki/Johann_Philipp_Kirnberger" target="_blank">Johann Philipp Kirnberger</a></strong> (also Kernberg; 24 April 1721, Saalfeld – 27 July 1783, Berlin) 
+                    was a german musician, composer (primarily of fugues), and music theorist. <br><br>
+                    Johann Philipp <em>Kirnberger</em> received violin and piano lessons in early childhood. After 
+                    attending the Latin school in Coburg, he went to Johann Peter Kellner in Gräfenroda to further his 
+                    musical knowledge. A later teacher and patron was the court organist Heinrich Nikolaus Gerber in Sondershausen.<br>
+                    A short stay of Kirnberger in Leipzig is documented for the year 1741. A possible apprenticeship with 
+                    Johann Sebastian Bach is disputed and cannot be proven. After a brief stay in Dresden, he went to Poland 
+                    for a longer period (1741 to 1751), where he held various positions, including harpsichordist and kapellmeister.<br>
+                    In the mid-1750s <em>Kirnberger</em> returned to Germany to take lessons in violin playing. After a position as violinist 
+                    in the royal chapel in Potsdam, he later joined the chapel of Margrave Heinrich in Rheinsberg. He then held 
+                    the position of composition teacher to Anna Amalie of Prussia until his death in 1758, and also served as 
+                    Kapellmeister and musical advisor to the Prussian court. The majority of his compositions were written during this time.<br>
+                    His chamber music primarily consists of flute sonatas and trio sonatas; a flute sonata in 
+                    E-flat minor is probably <em>Kirnberger</em>'s most important work. He also constructed a total of three 
+                    tempered tunings. The most balanced, third tuning is often referred to as the Kirnberger tuning.<br>          
+                    Through <em>Kirnberger</em>'s collecting activities, a whole series of Johann Sebastian Bach's works has come 
+                    down to us - the most well-known is the so-called Kirnberger collection with the chorale arrangements BWV 690-713.
+                </p>
+                <p>source: <a href="https://de.wikipedia.org/wiki/Johann_Philipp_Kirnberger" target="_blank">Wikipedia</a></p>
+            </div>
+            <div class="composer-image">
+                <a href="https://it.wikipedia.org/wiki/Johann_Philipp_Kirnberger#/media/File:Johann_Philipp_Kirnberger.jpg" target="_blank">
+                    <img src="pictures/kirnberger.jpg" alt="A painting of Kirnberger" width="190" height="250"/>
+                </a>
+            </div>
+        </div>
+        
+        <h3>About the music: <em>Der allezeit fertige Polonoisen und Menuettencomponist</em></h3>
+        <p>Published: 1757 by George Ludewig Winter (Pub.)</p>
+        
+            <div class="container">
+                <div id="cite">
+                    <h5><br>Extract:</h5>
+                    <p>"Die Noten, welche auf den nachfolgenden wenigern Blättern erscheinen, sind der Stoff zu einer unzählbaren 
+                    Menge von <strong>Polonoisen</strong>, <strong>Menuetten</strong> und dazu gehörigen <strong>Trios</strong>. 
+                        Ein jeder der nur Würfel und Zahlen kennt, und Noten abschreiben kann, ist fähig, sich daraus so viele 
+                        der genannten kleinen Stücke, vermittelst <strong>eines oder zweer Würfel</strong> zu componieren, als er nur verlanget.<br>
+                    Hat man mit einem Würfel eine Zahl geworfen; so suchet man in den Tabellen auf welchen die Nummern stehen, nachdem 
+                    man nämlich Polonoisen, Menuetten oder Trios verfertigen will, in dem ersten Fache von der Linken zur Rechten die 
+                    Zahl auf welchen man geworfen hat."<br>"Auf diese Art wird <strong>bei jedem Wurfe ein Tact</strong>, und mit sechs oder acht 
+                    Würfen der erste Theil einer Polonoise, Menuet oder Trios fertig. <br>[...]<br>
+                    Will man sich der Würfel gar nicht bedienen; so darf man nur sich <strong>freywillig Zahlen annehmen</strong>, welche man 
+                    will, die man geworfen haben könnte; und damit eben so verfahren, als wenn man gewürfel hätte."</p>
+                    <p>Translation:
+                        <br>"The notes, which appear on the following few sheets, are the material for an innumerable number 
+                        of <strong>polonoises</strong>, <strong>minuets</strong> and <strong>trios</strong> belonging to them. Anyone who knows only dice and numbers, and 
+                        can copy notes, is able to compose as many of the aforementioned small pieces from them as he 
+                        requires, by means of <strong>one or two dice</strong>.<br>
+                        When one has thrown a number with a dice, one looks in the tables on which the numbers are written, 
+                        after one wants to compose polonoises, minuets or trios, in the first compartment from the left to 
+                        the right, for the number on which one has thrown."<br>"In this way, <strong>with each throw, one bar</strong> is 
+                        completed, and with six or eight throws, the first part of a polonoise, minuet or trio is finished.
+                        <br>[...]<br>
+                        If one does not want to make use of the dice at all, then one may only <strong>freely assume numbers</strong> that 
+                        one wants, that one could have thrown; and proceed with this just as if one had thrown the dice."</p>
+                </div>
+                <div id="table">
+                    <h5>Table on how to choose measures for polonoises:</h5>
+                    <img src="pictures/polonaise_tabelle.PNG" alt="table of diced measures for polonaises with 1 and 2 dices" width="700" height="500"/>
+                    <div id="cite2">
+                        <h5>About target audience:</h5>
+                        <p>Kirnberger wanted to target and reach <strong>music lovers</strong> (<em>Liebhaber der Musik</em>) with his book rather than professional 
+                            composers, who would still be able to take something away from the collection.</p>
+                        <p>"Einen wirklichen Compositionsverständigen wird zum wenigsten, die in diesen Tabellen vorkommende, 
+                        so mannigfaltige Ausbildung eben derselben Harmonie, über einerley Grundstimme, nicht ganz zuwider 
+                        seyn. Ein angehender Tonsetzer kann vielleicht darauf einigen Vortheil, zur Sammlung eines Vorraths 
+                        von Veränderungen der musikalischen Figuren, ziehen."
+                        <br><br>Translation:
+                            <br>"A real composition expert will, at least, not be completely repelled by the manifold formation
+                            of the same harmony over the same basic voice that occurs in these tables. An aspiring composer
+                            can perhaps derive some benefit from them, for the collection of a stock of changes in musical figures."
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        
+        <p>source: <a href="http://de.instr.scorser.com/D/121713.html">digital score</a> and 
+            <a href="https://s9.imslp.org/files/imglnks/usimg/e/ea/IMSLP374746-PMLP243537-kirnberger_allezeit_fertiger_usw.pdf">original score</a></p>
+    </div>
+    
+</body>
+
+</html>

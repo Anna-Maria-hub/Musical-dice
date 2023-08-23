@@ -15,7 +15,7 @@
     
     
     <style>
-               
+        
        p, h3 {
           padding: 10px;
        }
@@ -28,7 +28,7 @@
        }       
        #background::before {
          content: "";
-         background-image: url('pictures/header_bild.PNG');
+         background-image: url('header_bild.PNG');
          background-size: initial;
          background-position: center;
          position: absolute;
@@ -45,35 +45,14 @@
          z-index: 3;
        }
        
-       /* home, info and about buttons in header*/
-       #home, 
-       #info,
-       #about {
-         position: absolute;
-         top: 50px;
-         background: black;
-       }
-       #home {
-         right: 146px;
-       }       
-       #info {
-         right: 86px;
-       }
-       #about {
-         right: 10px;
-       }
-                  
-       #section1 {
-         width: 100%;
-       }
-       
        #empty-boxes {
           float: left;
           width: 80%;
           background-color: #f1f1f1;
-          padding: 30px;
-          height: 300px;
-          overflow-x: auto;          
+          padding: 20px;
+          height: 400px;
+          overflow-x: auto;
+          
        }          
        
        #button {
@@ -90,12 +69,7 @@
           width: 20%;
           padding: 10px;
        }
-       .roll_num {
-          text-align: center;
-          margin: 0;
-          padding: 0 0 3px 0;
-       }
-       
+      
        /* clear floats after section */    
        section::after {
           content: "";
@@ -108,21 +82,22 @@
           background-color: #ccc;
           padding: 20px 0 0 50px;
           width: 100%;
-          overflow: hidden;          
+          overflow: hidden;
+          
        }
         
        /* measure picture size */ 
        .drop, 
        .drag {
-          width: 120px;
-          height: 160px;
+          width: 150px;
+          height: 200px;
           margin: 10px;
           padding: 10px;
           box-sizing: border-box;
           display: inline-block;
           vertical-align: top;
         }
-        /* dropped pictures size fits into box*/
+        /* dropped pictures size */
         .drop img {
           width: 100%;
           height: 100%;
@@ -131,17 +106,17 @@
           border: 1px solid black;
         }        
         
-        /* Hide images of slideshow by default, only show first measure */
+        /* Hide images of slideshow by default, show first measure */
        .slideshow-container .mySlides {
          display: none; 
         }
         .mySlides.active {
           display: flex;
-          overflow: hidden;
+          overflow: auto;
         }
         .slideshow-container{
-          height: auto;
-          overflow: ;
+          height: 400px;
+          overflow: scroll;
           position: relative;
         }
         
@@ -166,13 +141,13 @@
             border-radius: 3px 0 0 3px;
         }        
         
-        
-        .prev:hover,    /* On hover, add a black background color with a little bit see-through */
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
         .next:hover {
             background-color: rgba(0, 0, 0, 0.4);
         }
         
-        /* text measure 1, measure 2,... on top of section */
+        /* measure 1, measure 2,... on top of section */
         .numbertext {
           color: black;
           font-size: 16px;
@@ -180,25 +155,15 @@
           position: relative;
           top: 0;
         }
-        
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #f8f9fa;
-            padding: 10px 0;
+       
+       .roll_num {
+          text-align: center;
+          margin: 0;
+          padding: 0 0 3px 0;
        }
         
-       /* if screen < 800px */
-       @media screen and (max-width: 980px) {
-            #background h2 {
-               font-size: 40px;
-            }
-            #home, #about, #info {
-               top: 70px;
-               font-size: 14px;
-            }
-            
+       /* if screen < 768px */
+       @media screen and (max-width: 768px) {
             #empty-boxes {
                 width: 100%; 
                 padding: 10px;
@@ -209,8 +174,8 @@
             #dice {
                 width: 100%;
                 text-align: center;
-                float: none;
-                margin-top: 20px;
+                float: none; /* Kein Float auf kleineren Bildschirmen */
+                margin-top: 20px; /* Platz über dem Würfel-Button */
             }
             
             .drop,
@@ -222,8 +187,8 @@
             }
             
             .slideshow-container {
-                height: auto;
-                overflow: hidden;
+                height: auto; /* Automatische Höhe für kleinere Bildschirme */
+                overflow: hidden; /* Overflow ausblenden */
             }
     
             .slideshow-container .mySlides {
@@ -232,22 +197,22 @@
             .mySlides.active {
                 display: flex;
                 flex-wrap: nowrap; /* Bilder werden in einer Zeile umgebrochen */
-                justify-content: center;
+                justify-content: center; /* Bilder zentriert ausrichten */
             }
     
             .slideshow-container .mySlides .drag {
                 width: auto;
-                margin: 3px;
-                padding: 3px;
+                margin: 3px; /* Kleinerer Abstand für kleinere Bildschirme */
+                padding: 3px; /* Kleinere Polsterung für kleinere Bildschirme */
             }
             
             .slideshow-container .mySlides .drag img {
             max-width: 100%;
             max-height: 100%;
-            width: auto;
-            height: auto;
-            }
+            width: auto; /* Automatische Breite beibehalten */
+            height: auto; /* Automatische Höhe beibehalten */
         }
+        
     </style>
     <script>
             var soundArray =["empty", "empty", "empty", "empty", "empty", "empty"];
@@ -384,7 +349,7 @@
                     para.innerHTML = rannum;
                     
                     // Get dice picture based on rannum
-                    document.getElementById("myImg").src = "pictures/dice_" + rannum + ".png";
+                    document.getElementById("myImg").src = "dice_" + rannum + ".png";
                     
                     // SOUND IS NOT PLAYED WHEN FILLED --> "PLAY" BUTTON
                 }
@@ -413,44 +378,6 @@
                     currentAudio = null;
                 }
             }
-            
-            function downloadMelody() {
-                const filledTacts = soundArray.filter(sound => sound !== "empty");
-            
-                if (filledTacts.length >= 6) {
-                    const melodyArray = filledTacts.slice(0, 6);
-            
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const recorder = new Recorder(audioContext);
-            
-                    melodyArray.forEach(sound => {
-                        const audio = new Audio(`music/${sound}.wav`);
-                        const source = audioContext.createMediaElementSource(audio);
-                        source.connect(recorder.input);
-                        audio.play();
-                    });
-            
-                    recorder.start();
-            
-                    setTimeout(() => {
-                        recorder.stop();
-                        recorder.exportWAV(blob => {
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement("a");
-                            a.href = url;
-                            a.download = "melody.wav";
-                            a.textContent = "Download Melody";
-                            a.style.display = "none";
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                            URL.revokeObjectURL(url);
-                        });
-                    }, 1000);
-                } else {
-                    alert("Fill in at least 6 bars first!");
-                }
-            }
         
     </script>
 </head>
@@ -460,16 +387,13 @@
     <header>
         <div id="background">
             <h2>Musical game of dice</h2>
-            <a href="index.html" id="home" class="btn btn-primary">Home</a>
-            <a href="Info.html" id="info" class="btn btn-primary">Info</a>
-            <a href="About.html" id="about" class="btn btn-primary">About</a>
         </div>
     </header>
     
     <!-- empty boxes for dragging -->
     <section id="section1">
         <div id="empty-boxes" class="row">
-            <h3>Create your own melody here:</h3>
+            <h3>Make your own melody here:</h3>
             <div class="drop" id="container0" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
             <div class="drop" id="container1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
             <div class="drop" id="container2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
@@ -484,8 +408,6 @@
             
             <button id="play-button" onclick="playSound(soundArray)">Play <i class="fas fa-play"></i></button>
             <button id="stop-button" onclick="stopSound()">Stop <i class="fas fa-stop"></i></button>
-            <button onclick="downloadMelody()">Download</button>
-            
             
             <!-- to check what's in the SoundArray:
                 <button onclick="checkSoundArray()">Check soundArray</button> -->
@@ -495,7 +417,7 @@
         <div id="dice">
             <button onclick="clickevent()">Roll the dice!</button>
             <p id="demo"></p>
-            <img id="myImg" src="" alt="dice" height="100px" width="100px">
+            <img id="myImg" src="" alt="dice" height="150px" width="150px">
         </div>
     </section> 
     
@@ -505,7 +427,6 @@
         <div class="slideshow-container">
             <div class="mySlides active">
                 <div class="numbertext">measure 1:</div>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m1_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas1_1" width="120" height="170">
@@ -532,9 +453,7 @@
                 </div>
            </div>
             <div class="mySlides">
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <div class="numbertext">measure 2:</div>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m2_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas2_1" width="120" height="170">
@@ -561,9 +480,7 @@
                 </div>
             </div>
             <div class="mySlides">
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <div class="numbertext">measure 3:</div>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m3_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas3_1" width="120" height="170">
@@ -590,9 +507,7 @@
                 </div>
             </div>
             <div class="mySlides">
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <div class="numbertext">measure 4:</div>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m4_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas4_1" width="120" height="170">
@@ -619,9 +534,7 @@
                 </div>
             </div>
             <div class="mySlides">
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <div class="numbertext">measure 5:</div>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
                     <img src="measures/m5_r1.PNG" alt="measure 1" draggable="true" ondragstart="drag(event)" id="meas5_1" width="120" height="170">
@@ -648,7 +561,6 @@
                 </div>
             </div>
             <div class="mySlides">
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <div class="numbertext">measure 6:</div>
                 <div class="drag" ondrop="drop(event)">
                     <p class="roll_num">1</p>
@@ -676,14 +588,18 @@
                 </div>
             </div>
             
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-    </section>
-    <footer>
+        <div class="Link">
             <p>Source: 
-                <a href="https://s9.imslp.org/files/imglnks/usimg/e/ea/IMSLP374746-PMLP243537-kirnberger_allezeit_fertiger_usw.pdf" target="_blank">
-                    Johann Philipp Kirnberger's "Der allezeit fertige Polonoisen und Menuettencomponist"</a>. This website is available on <a href="https://github.com/Anna-Maria-hub/Musical-dice">GitHub</a>.
-            </p>
-    </footer>
+            <a href="https://s9.imslp.org/files/imglnks/usimg/e/ea/IMSLP374746-PMLP243537-kirnberger_allezeit_fertiger_usw.pdf" target="_blank">
+                Johann Philipp Kirnberger's "Der allezeit fertige Polonoisen und Menuettencomponist"
+            </a></p>
+        </div>
+        
+    </section>
     
 </body>
 

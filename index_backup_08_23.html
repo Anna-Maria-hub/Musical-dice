@@ -15,7 +15,8 @@
     
     
     <style>
-               
+        
+        
        p, h3 {
           padding: 10px;
        }
@@ -413,44 +414,6 @@
                     currentAudio = null;
                 }
             }
-            
-            function downloadMelody() {
-                const filledTacts = soundArray.filter(sound => sound !== "empty");
-            
-                if (filledTacts.length >= 6) {
-                    const melodyArray = filledTacts.slice(0, 6);
-            
-                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    const recorder = new Recorder(audioContext);
-            
-                    melodyArray.forEach(sound => {
-                        const audio = new Audio(`music/${sound}.wav`);
-                        const source = audioContext.createMediaElementSource(audio);
-                        source.connect(recorder.input);
-                        audio.play();
-                    });
-            
-                    recorder.start();
-            
-                    setTimeout(() => {
-                        recorder.stop();
-                        recorder.exportWAV(blob => {
-                            const url = URL.createObjectURL(blob);
-                            const a = document.createElement("a");
-                            a.href = url;
-                            a.download = "melody.wav";
-                            a.textContent = "Download Melody";
-                            a.style.display = "none";
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                            URL.revokeObjectURL(url);
-                        });
-                    }, 1000);
-                } else {
-                    alert("Fill in at least 6 bars first!");
-                }
-            }
         
     </script>
 </head>
@@ -484,8 +447,6 @@
             
             <button id="play-button" onclick="playSound(soundArray)">Play <i class="fas fa-play"></i></button>
             <button id="stop-button" onclick="stopSound()">Stop <i class="fas fa-stop"></i></button>
-            <button onclick="downloadMelody()">Download</button>
-            
             
             <!-- to check what's in the SoundArray:
                 <button onclick="checkSoundArray()">Check soundArray</button> -->
