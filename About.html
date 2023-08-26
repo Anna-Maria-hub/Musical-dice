@@ -14,63 +14,84 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         
         
-        <style>
+    <style>
+          body {
+              text-align: justify;
+              line-height: 20px;
+         }
+         
+         #section1 {
+              margin-top: 100px;
+              width: 100%;
+         }
+         #section2 {
+            margin-bottom: 100px;
+            width: 100%;
+         }
+         
+         header  {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+         }
+         
+         nav {
+            position: fixed;
+            top: 35px;
+            line-height: 30px;
+            right: 5px;
+            padding-left: 200px;
+         }              
+         
+         #background {
+           position: relative;
+           border: 1px solid black;
+           padding: 15px;
+           text-align: center;
+         }       
+         #background::before {
+           content: "";
+           background-image: url('pictures/header_bild2.PNG');
+           background-size: initial;
+           background-position: center;
+           position: absolute;
+           top: 0;
+           right: 0;
+           bottom: 0;
+           left: 0;
+         }       
+         #background h2 {
+           color: black;
+           position: relative;
+           z-index: 3;
+         }
+         
+         p, h3 {
+            padding: 10px;
+         }               
+         
+         #thankyou {
+           font-size: x-large;
+           text-align: center;
+         }
+         #thank { 
+           font-size: larger;
+           text-align: center;
+         }
+         footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 15px 0 15px 20px;
+       }
         
-       p, h3, h4, h5 {
-          padding: 15px;
+       a {
+          color: #810CA8;
+          text-decoration: underline;
        }
-       
-       #background {
-         position: relative;
-         border: 1px solid black;
-         padding: 25px;
-         text-align: center;
-       }       
-       #background::before {
-         content: "";
-         background-image: url('pictures/header_bild.PNG');
-         background-size: initial;
-         background-position: center;
-         position: absolute;
-         top: 0;
-         right: 0;
-         bottom: 0;
-         left: 0;
-         opacity: 0.3;
-         z-index: -1;
-       }       
-       #background h2 {
-         color: black;
-         position: relative;
-         z-index: 3;
-       }
-       
-       #home, 
-       #info,
-       #about {
-         position: absolute;
-         top: 50px;
-         background: black;
-       }
-       #home {
-         right: 146px;
-       }       
-       #info {
-         right: 86px;
-       }
-       #about {
-         right: 10px;
-       }             
-       
-       #thankyou {
-         font-size: x-large;
-         text-align: center;
-       }
-       #thank { 
-         font-size: larger;
-         text-align: center;
-       }
-       
+         
     </style>
         <script>
             
@@ -83,12 +104,13 @@
         <header>
             <div id="background">
                 <h2>Musical game of dice</h2>
-                <a href="index.html" id="home" class="btn btn-primary">Home</a>
-                <a href="Info.html" id="info" class="btn btn-primary">Info</a>
-                <a href="About.html" id="about" class="btn btn-primary">About</a>
+              <nav>
+                <a href="index.html" id="home" class="btn btn-dark">Home</a> 
+                <a href="Info.html" id="info" class="btn btn-dark">Info</a>
+                <a href="About.html" id="about" class="btn btn-dark">About</a></nav>
             </div>
         </header>
-        <div>
+        <div id="section1">
             <h3>Welcome to "Musical Game of Dice"!</h3>   
             <p>This project is the result of a solo endeavor undertaken within the context
                 of a <em>University of Vienna</em> course. With a passion for music, history, and technology, 
@@ -109,6 +131,13 @@
             <p id="thank">
                 <strong id="thankyou">Thank you for exploring this project with me!</strong><br>Your interest and curiosity are greatly appreciated!
             </p>
+          <footer>
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Anna-Maria Pfiel, 2023. Sources: 
+            <a href="http://de.instr.scorser.com/D/121713.html">digital score</a> and 
+            <a href="https://s9.imslp.org/files/imglnks/usimg/e/ea/IMSLP374746-PMLP243537-kirnberger_allezeit_fertiger_usw.pdf">original score</a>, <a href="https://de.wikipedia.org/wiki/Johann_Philipp_Kirnberger" target="_blank">Wikipedia</a>.
+            This website is available on <a href="https://github.com/Anna-Maria-hub/Musical-dice">GitHub</a>.  
+          </footer>
+          
         </div>                   
     </body>
     
