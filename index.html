@@ -194,7 +194,7 @@
         }
         
         footer {
-            position: fixed;
+            position: relative;
             bottom: 0;
             width: 100%;
             background-color: #f8f9fa;
@@ -208,13 +208,29 @@
        
        /* if screen < 800px */
        @media screen and (max-width: 980px) {
+            header  {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+             }
+             
+             nav {
+                position: relative;
+                top: 0;
+                font-size: 12px;
+                right: 5px;
+                padding-left: 200px;
+             }
+             
+       
             #background h2 {
                font-size: 40px;
             }
-            #home, #about, #info {
-               top: 80px;
-               font-size: 14px;
-            }
+            
+            #section1 {
+                margin-top: 0;
+           }
             
             #empty-boxes {
                 width: 100%; 
@@ -222,6 +238,7 @@
                 height: auto;
                 overflow: hidden;
             }
+            
         
             #dice {
                 width: 100%;
@@ -267,6 +284,10 @@
             #section3 {
                 padding: 20px 20px 80px 30px;
              }
+             
+             footer {
+                position: relative;
+           }
         }
     </style>
     <script>
@@ -483,7 +504,7 @@
     
     <!-- boxes with pictures -->
     <section id="section2" class="row">
-        <h3>Pick a number from here for measures 1 to 6 and drag it above:</h3>
+        <h3>Or pick a number from here for measures 1 to 6 and drag it above:</h3>
         <div class="slideshow-container">
             <div class="mySlides active">
                 <div class="numbertext">Measure 1:</div>

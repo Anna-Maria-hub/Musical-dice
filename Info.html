@@ -103,6 +103,10 @@
          text-align: center;
          margin-left: auto;
        }
+       #table_pic {
+         width: 700px;
+         height: 500px;
+       }
        
        footer {
             position: fixed;
@@ -115,6 +119,60 @@
        a {
           color: #810CA8;
           text-decoration: underline;
+       }
+       
+       /* if screen < 980px */
+       @media screen and (max-width: 980px) {
+       
+            header {
+              position: relative;
+            }
+            
+            nav {
+              position: relative;
+              top: 0;
+              font-size: 12px;
+            }
+            
+            #background h2 {
+               font-size: 40px;
+            }
+                 
+            #section1 {
+               margin-top: 0;
+               margin-bottom: 0;
+            }
+       
+            .composer-info {
+                display: block;
+              }
+              .composer-text {
+                flex: 0;
+                padding: 10px;
+              }
+              .composer-image {
+                padding: 10px;
+                text-align: center;
+              }
+              
+              .container {
+                display: block;
+                padding: 10px;
+              }
+              
+              #table_pic {
+                height: 100%;
+                width: 100%;
+              }
+              
+              #table {
+                bottom: 0;
+              }
+              
+              footer {
+                position: relative;
+                bottom: 0;
+              }
        }
         
     </style>
@@ -142,20 +200,20 @@
                 <p><strong><a href="https://de.wikipedia.org/wiki/Johann_Philipp_Kirnberger" target="_blank">Johann Philipp Kirnberger</a></strong> (also Kernberg; 24. April 1721, Saalfeld – 27. July 1783, Berlin) 
                     was a german musician, composer (primarily of fugues), and music theorist. (<a href="https://d-nb.info/gnd/118777238" target="_blank">GND</a>, 
                     <a href="https://www.wikidata.org/wiki/Special:EntityPage/Q505543" target="_blank">Wikidata</a>)
-                <br><br>
+                <br><br><br>
                     Johann Philipp <em>Kirnberger</em> received violin and piano lessons in early childhood. After 
                     attending the Latin school in Coburg, he went to Johann Peter Kellner in Gräfenroda to further his 
-                    musical knowledge. A later teacher and patron was the court organist Heinrich Nikolaus Gerber in Sondershausen.<br>
+                    musical knowledge. A later teacher and patron was the court organist Heinrich Nikolaus Gerber in Sondershausen.<br><br>
                     A short stay of <em>Kirnberger</em> in Leipzig is documented for the year 1741. A possible apprenticeship with 
                     Johann Sebastian Bach is disputed and cannot be proven. After a brief stay in Dresden, he went to Poland 
-                    for a longer period (1741 to 1751), where he held various positions, including harpsichordist and kapellmeister.<br>
+                    for a longer period (1741 to 1751), where he held various positions, including harpsichordist and kapellmeister.<br><br>
                     In the mid-1750s <em>Kirnberger</em> returned to Germany to take lessons in violin playing. After a position as violinist 
                     in the royal chapel in Potsdam, he later joined the chapel of Margrave Heinrich in Rheinsberg. He then held 
                     the position of composition teacher to Anna Amalie of Prussia until his death in 1758, and also served as 
-                    Kapellmeister and musical advisor to the Prussian court. The majority of his compositions were written during this time.<br>
+                    Kapellmeister and musical advisor to the Prussian court. The majority of his compositions were written during this time.<br><br>
                     His chamber music primarily consists of flute sonatas and trio sonatas; a flute sonata in 
                     E-flat minor is probably <em>Kirnberger</em>'s most important work. He also constructed a total of three 
-                    tempered tunings. The most balanced, third tuning is often referred to as the Kirnberger tuning.<br>          
+                    tempered tunings. The most balanced, third tuning is often referred to as the Kirnberger tuning.<br><br>          
                     Through <em>Kirnberger</em>'s collecting activities, a whole series of Johann Sebastian Bach's works has come 
                     down to us - the most well-known is the so-called Kirnberger collection with the chorale arrangements BWV 690-713.
                 <br><br>source: <a href="https://de.wikipedia.org/wiki/Johann_Philipp_Kirnberger" target="_blank">Wikipedia</a></p>
@@ -199,8 +257,8 @@
                 </div>
                 <div id="table">
                     <h5>Table on how to choose measures for polonoises:</h5>
-                    <img src="pictures/polonaise_tabelle.PNG" alt="table of diced measures for polonaises with 1 and 2 dices" width="700" height="500"/>
-                    <div id="cite2">
+                    <img id="table_pic" src="pictures/polonaise_tabelle.PNG" alt="table of diced measures for polonaises with 1 and 2 dices"/><br><br><br>
+                    <div id="cite2"><br>
                         <h5>About target audience:</h5>
                         <p>Kirnberger wanted to target and reach <strong>music lovers</strong> (<em>Liebhaber der Musik</em>) rather than professional 
                             composers, who would still be able to take something away from the collection:<br><br><br>

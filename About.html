@@ -22,11 +22,8 @@
          
          #section1 {
               margin-top: 100px;
+              margin-bottom: 100px;
               width: 100%;
-         }
-         #section2 {
-            margin-bottom: 100px;
-            width: 100%;
          }
          
          header  {
@@ -92,6 +89,34 @@
             text-decoration: underline;
          }
          
+         /* if screen < 980px */
+       @media screen and (max-width: 980px) {
+       
+            header {
+              position: relative;
+            }
+            
+            nav {
+              position: relative;
+              top: 0;
+              font-size: 12px;
+            }
+            
+            #background h2 {
+               font-size: 40px;
+            }
+                 
+            #section1 {
+               margin-top: 0;
+               padding-bottom: 10px;
+            }
+              
+              footer {
+                position: relative;
+                bottom: 0;
+              }
+       }
+         
     </style>
         <script>
             
@@ -126,19 +151,19 @@
                 allowing you to see how it was built and explore its features.<br><br>                
                 I extend my gratitude to the University of Vienna for providing me with the opportunity 
                 to pursue this project. This endeavor has not only enriched my understanding of music history
-                but has also allowed me to showcase my skills in web development.<br><br>                
+                but has also allowed me to showcase my skills in web development. 
+                (Please keep in mind, this is not a finished product when using this website)<br><br>  
             </p>
             <p id="thank">
                 <strong id="thankyou">Thank you for exploring this project with me!</strong><br>Your interest and curiosity are greatly appreciated!
             </p>
-          <footer>
+        </div> 
+        <footer>
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Anna-Maria Pfiel, 2023. Sources: 
             <a href="http://de.instr.scorser.com/D/121713.html">digital score</a> and 
             <a href="https://s9.imslp.org/files/imglnks/usimg/e/ea/IMSLP374746-PMLP243537-kirnberger_allezeit_fertiger_usw.pdf">original score</a>, <a href="https://de.wikipedia.org/wiki/Johann_Philipp_Kirnberger" target="_blank">Wikipedia</a>.
             This website is available on <a href="https://github.com/Anna-Maria-hub/Musical-dice">GitHub</a>.  
-          </footer>
-          
-        </div>                   
+          </footer>                  
     </body>
     
 </html>
